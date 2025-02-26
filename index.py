@@ -4,9 +4,7 @@ import pandas as pd
 import datetime
 
 # Streamlit title
-st.title('사전 학습 2강.')
-st.header('주가 데이터 시각화 (w. Streamlit)')
-st.text('* [사전 학습 1강] - [과제] - [주가 데이터 시각화] 코드 응용')
+st.title('주가 데이터 시각화')
 st.header('')
 
 st.divider()
@@ -14,9 +12,13 @@ st.subheader('설정창')
 st.title('')
 
 # User inputs for stock code and date range
-stock_code = st.text_input("종목 코드 입력 :", '377480')
+stock_code = st.text_input("종목 코드 입력 :", '005930')
 st.subheader('')
-date_range = st.date_input("조회일 설정 :", [datetime.date(2023, 1, 1), datetime.date(2023, 8, 14)])
+
+today = datetime.date.today()
+one_year_ago = today - datetime.timedelta(days=365)
+
+date_range = st.date_input("조회일 설정 :", [one_year_ago, today])
 
 
 st.divider()
@@ -55,7 +57,6 @@ st.dataframe(df)
 
 # Plot the data using Streamlit's line_chart and bar_chart
 st.divider()
-st.subheader('데이터 시각화')
 st.title('')
 
 st.line_chart(df[['5일', '20일', '60일', '120일', '240일']])
